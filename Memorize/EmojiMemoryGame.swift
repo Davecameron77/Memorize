@@ -9,16 +9,16 @@ import SwiftUI
 
 // This is the ViewModel
 class EmojiMemoryGame: ObservableObject {
+    typealias Card = MemoryGame<String>.Card
+    private static let emojis = ["🚗", "✈️", "🛩", "🚀", "🚁", "🚤", "🛳", "🚞", "⛵️", "🏍", "🚠", "🚃", "🚲", "🚜", "🛵", "🚛", "🚍", "🛶", "🚓", "🚑", "🥃", "🍺", "☕️", "🍷"]
     
-    static let emojis = ["🚗", "✈️", "🛩", "🚀", "🚁", "🚤", "🛳", "🚞", "⛵️", "🏍", "🚠", "🚃", "🚲", "🚜", "🛵", "🚛", "🚍", "🛶", "🚓", "🚑", "🥃", "🍺", "☕️", "🍷"]
-    
-    static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 3) { pairIndex in
+    private static func createMemoryGame() -> MemoryGame<String> {
+        MemoryGame<String>(numberOfPairsOfCards: 6) { pairIndex in
             emojis[pairIndex]
         }
     }
         
-    @Published private var model: MemoryGame<String> = createMemoryGame()
+    @Published private var model = createMemoryGame()
     
     var cards: Array<MemoryGame<String>.Card> {
         return model.cards
